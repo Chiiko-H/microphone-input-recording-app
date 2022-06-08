@@ -41,5 +41,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='C:\\Users\\xxxxx\\PycharmProjects\\recTel_v2\\img\\favicon.ico',
+    icon='img\\favicon.ico',
 )

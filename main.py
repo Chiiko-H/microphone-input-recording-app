@@ -4,6 +4,8 @@ https://github.com/Chiiko-H
 '''
 
 import tkinter as tk
+
+import ffmpeg
 import pyaudio
 import wave
 import subprocess
@@ -11,7 +13,7 @@ import os
 import time
 import datetime
 import threading
-import pydub
+#import pydub
 
 
 class Application(tk.Frame):
@@ -192,8 +194,13 @@ class Application(tk.Frame):
             wave_f.writeframes(b''.join(rec_data))
             wave_f.close()
             # wav -> mp3
-            sound = pydub.AudioSegment.from_wav(file_path)
-            sound.export(self.REC_DIR + "\\" + filename + ".mp3", format="mp3")
+            #sound = pydub.AudioSegment.from_wav(file_path)
+            #sound.export(self.REC_DIR + "\\" + filename + ".mp3", format="mp3")
+
+            stream = ffmpeg.input(file_path)
+            stream = ffmpeg.output(stream, self.REC_DIR + "\\" + filename + ".mp3")
+            ffmpeg.run(stream)
+
             mp3_filename = filename + ".mp3"
             fileName.configure(text=mp3_filename)
             # delete wav file
